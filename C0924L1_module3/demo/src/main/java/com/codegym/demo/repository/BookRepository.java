@@ -1,14 +1,10 @@
 package com.codegym.demo.repository;
 import com.codegym.demo.model.Book;
 import com.codegym.demo.util.BaseRepository;
-
 import java.sql.*;
 import java.util.*;
 
-import java.sql.*;
-import java.util.*;
-
-public class BookRepository {
+public class BookRepository implements IBookRepository {
 
     public List<Book> getAllBooks() {
         List<Book> books = new ArrayList<>();

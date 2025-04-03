@@ -1,45 +1,69 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="vi">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sách đang mượn</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Danh sách sách đã mượn</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h2 class="text-center">Danh sách sách đang mượn</h2>
-    <table class="table table-bordered mt-4">
+<h1>Danh sách sách đã mượn</h1>
+
+<c:if test="${empty borrowRecords}">
+    <p>Không có sách nào được mượn.</p>
+</c:if>
+
+<c:if test="${not empty borrowRecords}">
+    <table>
         <thead>
         <tr>
-            <th>Mã sách</th>
+            <th>Mã mượn</th>
             <th>Tên sách</th>
-            <th>Tên học sinh</th>
+            <th>Học sinh</th>
             <th>Ngày mượn</th>
             <th>Ngày trả</th>
-            <th>Chức năng</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="borrowedBook" items="${borrowedBooks}">
+        <c:forEach var="record" items="${borrowRecords}">
             <tr>
-                <td>${borrowedBook.maSach}</td>
-                <td>${borrowedBook.tenSach}</td>
-                <td>${borrowedBook.tenHocSinh}</td>
-                <td>${borrowedBook.ngayMuon}</td>
-                <td>${borrowedBook.ngayTra}</td>
+                <td>${record.maMuon}</td>
+                <td>${record.tenSach}</td>
+                <td>${record.hoTenHS}</td>
+                <td><fmt:formatDate value="${record.ngayMuon}" pattern="dd/MM/yyyy"/></td>
+                <td><fmt:formatDate value="${record.ngayTra}" pattern="dd/MM/yyyy"/></td>
                 <td>
-                    <a href="return-book?maMuon=${borrowedBook.maMuon}" class="btn btn-success">Trả sách</a>
+                    <c:choose>
+                        <c:when test="${record.trangThai}">Đang mượn</c:when>
+                        <c:otherwise>Đã trả</c:otherwise>
+                    </c:choose>
+                </td>
+                <td>
+                    <c:if test="${record.trangThai}">
+                        <a href="return-book?maMuon=${record.maMuon}">Trả sách</a>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-</div>
+</c:if>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<p><a href="book-list">Quay lại danh sách sách</a></p>
 </body>
 </html>

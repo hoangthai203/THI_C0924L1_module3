@@ -5,9 +5,7 @@ import com.codegym.demo.repository.BookRepository;
 
 import java.util.*;
 
-import java.util.*;
-
-public class BookService {
+public class BookService implements IBookService {
 
     private BookRepository bookRepository = new BookRepository();
 

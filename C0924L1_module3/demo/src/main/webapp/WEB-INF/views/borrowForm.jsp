@@ -12,18 +12,28 @@
 <body>
 <div class="container mt-5">
     <h2 class="text-center">Mượn sách</h2>
+
+    <!-- Hiển thị thông báo lỗi nếu có -->
+    <c:if test="${not empty errorMessage}">
+        <div class="alert alert-danger" role="alert">
+                ${errorMessage}
+        </div>
+    </c:if>
+
     <form action="borrow" method="post">
         <div class="mb-3">
             <label for="maMuon" class="form-label">Mã mượn sách</label>
             <input type="text" class="form-control" id="maMuon" name="maMuon" required pattern="MS-\d{4}" title="Mã mượn sách phải theo định dạng MS-XXXX (X là số nguyên dương)">
         </div>
         <div class="mb-3">
-            <label for="maSach" class="form-label">Tên sách</label>
-            <input type="text" class="form-control" id="maSach" name="maSach" value="${book.tenSach}" readonly>
+            <label for="tenSach" class="form-label">Tên sách</label>
+            <input type="text" class="form-control" id="tenSach" value="${book.tenSach}" readonly>
+            <input type="hidden" name="maSach" value="${book.maSach}">
         </div>
         <div class="mb-3">
             <label for="maHS" class="form-label">Tên học sinh</label>
             <select class="form-select" id="maHS" name="maHS" required>
+                <option value="">-- Chọn học sinh --</option>
                 <c:forEach var="student" items="${students}">
                     <option value="${student.maHs}">${student.hoTen}</option>
                 </c:forEach>

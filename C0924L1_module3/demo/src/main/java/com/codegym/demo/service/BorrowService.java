@@ -1,11 +1,12 @@
 package com.codegym.demo.service;
 
 import com.codegym.demo.model.Book;
+import com.codegym.demo.model.BorrowRecord;
 import com.codegym.demo.repository.BorrowRepository;
-
 import java.sql.Date;
+import java.util.List;
 
-public class BorrowService {
+public class BorrowService implements IBorrowService{
 
     private BorrowRepository borrowRepository = new BorrowRepository();
     private BookService bookService = new BookService();
@@ -41,6 +42,10 @@ public class BorrowService {
             }
         }
         return result;
+    }
+
+    public List<BorrowRecord> getAllBorrowRecords() {
+        return borrowRepository.getAllBorrowRecords();
     }
 
     private String getBookIdByBorrowRecord(String maMuon) {

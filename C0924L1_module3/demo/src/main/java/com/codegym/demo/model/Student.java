@@ -1,22 +1,25 @@
 package com.codegym.demo.model;
 
 public class Student {
-    private String maHS;
+    private String maHs;
     private String hoTen;
     private String lop;
 
-    public Student(String maHS, String hoTen, String lop) {
-        this.maHS = maHS;
+    public Student() {
+    }
+
+    public Student(String maHs, String hoTen, String lop) {
+        this.maHs = maHs;
         this.hoTen = hoTen;
         this.lop = lop;
     }
 
-    public String getMaHS() {
-        return maHS;
+    public String getMaHs() {
+        return maHs;
     }
 
-    public void setMaHS(String maHS) {
-        this.maHS = maHS;
+    public void setMaHs(String maHs) {
+        this.maHs = maHs;
     }
 
     public String getHoTen() {

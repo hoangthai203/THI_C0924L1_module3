@@ -28,4 +28,39 @@
         <url-pattern>/borrow</url-pattern>
     </servlet-mapping>
 
+    <!-- Cấu hình Servlet cho BorrowFailController -->
+    <servlet>
+        <servlet-name>BorrowFailServlet</servlet-name>
+        <servlet-class>com.codegym.demo.controller.BorrowFailController</servlet-class>
+    </servlet>
+
+    <!-- Cấu hình Servlet Mapping cho BorrowFailController -->
+    <servlet-mapping>
+        <servlet-name>BorrowFailServlet</servlet-name>
+        <url-pattern>/borrow-fail</url-pattern>
+    </servlet-mapping>
+
+    <!-- Cấu hình Servlet cho BorrowedBookController -->
+    <servlet>
+        <servlet-name>BorrowedBookController</servlet-name>
+        <servlet-class>com.codegym.demo.controller.BorrowedBookController</servlet-class>
+    </servlet>
+
+    <!-- Cấu hình Servlet Mapping cho BorrowedBookController -->
+    <servlet-mapping>
+        <servlet-name>BorrowedBookController</servlet-name>
+        <url-pattern>/borrowed-books</url-pattern>
+    </servlet-mapping>
+
+    <!-- Cấu hình Servlet cho ReturnBookController -->
+    <servlet>
+        <servlet-name>ReturnBookController</servlet-name>
+        <servlet-class>com.codegym.demo.controller.ReturnBookController</servlet-class>
+    </servlet>
+
+    <!-- Cấu hình Servlet Mapping cho ReturnBookController -->
+    <servlet-mapping>
+        <servlet-name>ReturnBookController</servlet-name>
+        <url-pattern>/return-book</url-pattern>
+    </servlet-mapping>
 </web-app>

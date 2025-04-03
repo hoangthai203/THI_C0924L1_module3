@@ -1,12 +1,12 @@
 package com.codegym.demo.repository;
 
+import com.codegym.demo.model.BorrowRecord;
 import com.codegym.demo.util.BaseRepository;
-
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.sql.*;
-
-public class BorrowRepository {
+public class BorrowRepository implements IBorrowRepository{
 
     public String getBookIdByBorrowRecord(String maMuon) {
         String maSach = null;
@@ -59,6 +59,36 @@ public class BorrowRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<BorrowRecord> getAllBorrowRecords() {
+        List<BorrowRecord> borrowRecords = new ArrayList<>();
+        String sql = "SELECT tm.*, s.ten_sach, hs.ho_ten " +
+                "FROM the_muon tm " +
+                "JOIN sach s ON tm.ma_sach = s.ma_sach " +
+                "JOIN hoc_sinh hs ON tm.ma_hs = hs.ma_hs";
+
+        try (Connection connection = BaseRepository.getConnectDB();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                BorrowRecord borrowRecord = new BorrowRecord(
+                        resultSet.getString("ma_muon"),
+                        resultSet.getString("ma_sach"),
+                        resultSet.getString("ma_hs"),
+                        resultSet.getDate("ngay_muon"),
+                        resultSet.getDate("ngay_tra"),
+                        resultSet.getBoolean("trang_thai"),
+                        resultSet.getString("ten_sach"),
+                        resultSet.getString("ho_ten")
+                );
+                borrowRecords.add(borrowRecord);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return borrowRecords;
     }
 }
 
